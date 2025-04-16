@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  rene-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rene-bot
+    restart: unless-stopped
+    volumes:
+      # Mount data directory for persistence
+      - ./rene-data:/app/rene-data
+    environment:
+      # Discord token
+      - BOT_TOKEN=${BOT_TOKEN}
+      # Timezone
+      - TZ=${TZ}

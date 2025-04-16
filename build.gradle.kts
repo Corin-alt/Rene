@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     implementation("io.github.classgraph:classgraph:4.8.162")
-    implementation("net.dv8tion:JDA:5.2.2")
+    implementation("net.dv8tion:JDA:5.3.2")
     implementation("ch.qos.logback:logback-classic:1.2.8")
     implementation("org.slf4j:slf4j-api:1.7.32")
     implementation("org.xerial:sqlite-jdbc:3.44.1.0")

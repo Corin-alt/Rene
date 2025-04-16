@@ -1,7 +1,8 @@
 package fr.corentin.rene.managers;
 
 import fr.corentin.rene.Rene;
-import fr.corentin.rene.events.EightBallMessageListener;
+import fr.corentin.rene.events.AngryMessageReceivedEventListener;
+import fr.corentin.rene.events.EightBallMessageReceivedEventListener;
 import fr.corentin.rene.events.InteractionCommandsListener;
 import fr.corentin.rene.events.PrefixedCommandsListener;
 import fr.corentin.rene.events.parent.AEventListener;
@@ -58,7 +59,8 @@ public class EventManager {
     public void registerListeners() {
         jda.addEventListener(new InteractionCommandsListener());
         jda.addEventListener(new PrefixedCommandsListener());
-        jda.addEventListener(new EightBallMessageListener());
+        jda.addEventListener(new EightBallMessageReceivedEventListener());
+        jda.addEventListener(new AngryMessageReceivedEventListener());
         moduleEventsListeners.forEach((moduleId, listeners) -> jda.addEventListener(listeners));
     }
 

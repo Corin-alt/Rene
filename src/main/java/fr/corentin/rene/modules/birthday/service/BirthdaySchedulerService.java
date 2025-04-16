@@ -2,6 +2,7 @@ package fr.corentin.rene.modules.birthday.service;
 
 import fr.corentin.rene.Rene;
 import fr.corentin.rene.modules.birthday.BirthdayModuleManager;
+import fr.corentin.rene.utils.Channels;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class BirthdaySchedulerService {
     private static final LocalTime SCHEDULE_TIME = LocalTime.of(10, 10); // 10:00 AM
 
-    private static final String BIRTHDAY_CHANNEL_ID = "1190246104806195232";
+    private static final String BIRTHDAY_CHANNEL_ID = Channels.TAVERNE.getChannelID();
     private final BirthdayDatabaseService dbManager;
     private final Rene rene;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);

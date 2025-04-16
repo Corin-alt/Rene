@@ -2,7 +2,7 @@ package fr.corentin.rene.commands;
 
 public enum Permission {
     ALL("-1"),
-    ADMIN ("562386697174646787");
+    ADMIN ("832329868271943681");
 
     private final String roleId;
 

@@ -53,29 +53,54 @@ public class Rene {
         }
     }
 
+
     private String loadToken() {
-        String token = null;
+        // D'abord, essayer de charger le token depuis la variable d'environnement
+        String token = System.getenv("BOT_TOKEN");
+        if (token != null && !token.trim().isEmpty()) {
+            logger.info("Using bot token from environment variable");
+            return token;
+        }
+
+        // Si pas de variable d'environnement, essayer de charger depuis le fichier de propriétés
+        logger.info("Environment variable BOT_TOKEN not found, trying properties file");
         try {
-            propertyManager.loadProperties(dataFolder.getName() + File.separator + "/bot.properties");
+            propertyManager.loadProperties(dataFolder.getPath() + File.separator + "bot.properties");
             token = propertyManager.getProperty("token");
         } catch (Exception e) {
-            logger.error("Could not load bot properties from file.");
+            logger.error("Could not load bot properties from file.", e);
         }
+
         if (token == null || token.trim().isEmpty()) {
-            logger.error("Bot token is not set in bot.properties!");
+            logger.error("Bot token is not set! Please either:");
+            logger.error("1. Set the BOT_TOKEN environment variable, or");
+            logger.error("2. Add your token to the bot.properties file");
+            System.exit(1);
         }
+
         return token;
     }
 
+
     private void createJda() throws InterruptedException {
-        // Load properties
         String token = loadToken();
 
-        // Initialize JDA
-        this.jda = JDABuilder.createDefault(token)
-                .disableCache(CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY)
-                .enableIntents(List.of(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS))
-                .build().awaitStatus(JDA.Status.CONNECTED);
+        try {
+            // Initialize JDA
+            this.jda = JDABuilder.createDefault(token)
+                    .disableCache(CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY)
+                    .enableIntents(List.of(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS))
+                    .build().awaitStatus(JDA.Status.CONNECTED);
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().contains("Disallowed intent")) {
+                logger.error("ERROR: You need to enable privileged intents in the Discord Developer Portal!");
+                logger.error("Visit https://discord.com/developers/applications");
+                logger.error("Select your bot, go to the Bot tab, and enable MESSAGE CONTENT INTENT and SERVER MEMBERS INTENT");
+                System.exit(1);
+            } else {
+                throw e;
+            }
+        }
     }
 
     private void start() {
@@ -85,7 +110,7 @@ public class Rene {
 
         logger.info("Rene is running!");
         jda.getPresence().setPresence(OnlineStatus.DO_NOT_DISTURB,
-                Activity.playing("Communique Convo Simulator"), false);
+                Activity.playing("rien"), false);
         startTime = Instant.now();
     }
 
