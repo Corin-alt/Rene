@@ -48,3 +48,5 @@ bin/
 bot.properties
 rene-data/*
 .env
+.env.local
+.env.*.local
