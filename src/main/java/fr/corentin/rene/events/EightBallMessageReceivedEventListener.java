@@ -127,13 +127,11 @@ public class EightBallMessageReceivedEventListener extends AMessageReceivedEvent
     @Override
     public void execute(MessageReceivedEvent event) {
         String content = event.getMessage().getContentRaw();
+        String emoji8ball = Emoji.fromUnicode("U+1F3B1").getFormatted();
 
-        if (!content.contains(":8ball:") && !content.contains(Emoji.fromUnicode("U+1F3B1").getFormatted())) {
-            return;
+        if (content.contains(":8ball:") || content.contains(emoji8ball)) {
+            String randomAnswer = ANSWERS.get(random.nextInt(ANSWERS.size()));
+            event.getChannel().sendMessage(randomAnswer).queue();
         }
-
-        String randomAnswer = ANSWERS.get(random.nextInt(ANSWERS.size()));
-
-        event.getChannel().sendMessage(randomAnswer).queue();
     }
 }
