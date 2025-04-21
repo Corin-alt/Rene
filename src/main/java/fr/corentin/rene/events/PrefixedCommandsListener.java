@@ -30,6 +30,11 @@ public class PrefixedCommandsListener extends AEventListener {
 
         String[] parts = content.substring(prefix.length()).split("\\s+");
 
+        // Ignore empty commands or single special characters
+        if (parts.length == 0 || parts[0].isEmpty() || parts[0].matches("^[\\p{Punct}]$")) {
+            return;
+        }
+
         if (parts[0].matches(String.format("\\%s+", prefix))) {
             return;
         }
