@@ -19,8 +19,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class FalconiaDayEventListener extends AMessageReceivedEventListener {
-    private final String EMOJI = Emoji.fromUnicode("U+1F973").getFormatted();
-    private final String MESSAGE
+    private static final String EMOJI = Emoji.fromUnicode("U+1F973").getFormatted();
+    public static final String MESSAGE
             = EMOJI + " Aujourd'hui c'est Falconia Day ! Joyeux Falconia Day à tous ! " + EMOJI;
 
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -29,8 +29,6 @@ public class FalconiaDayEventListener extends AMessageReceivedEventListener {
 
     public FalconiaDayEventListener() {
         super(Collections.singleton(Channels.TAVERNE));
-        Rene.getInstance().getJda().getTextChannelById(Channels.TAVERNE.getChannelID())
-                .sendMessage(MESSAGE).queue();
     }
 
     @Override
