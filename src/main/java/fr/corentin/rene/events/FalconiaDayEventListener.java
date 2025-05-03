@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -30,8 +29,7 @@ public class FalconiaDayEventListener extends AMessageReceivedEventListener {
 
     public FalconiaDayEventListener() {
         super(Collections.singleton(Channels.TAVERNE));
-        Objects.requireNonNull(Rene.getInstance().getJda().getChannelById(TextChannel.class,
-                        Channels.TAVERNE.getChannelID()))
+        Rene.getInstance().getJda().getTextChannelById(Channels.TAVERNE.getChannelID())
                 .sendMessage(MESSAGE).queue();
     }
 
