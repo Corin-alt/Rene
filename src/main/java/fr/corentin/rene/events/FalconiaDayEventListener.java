@@ -29,6 +29,8 @@ public class FalconiaDayEventListener extends AMessageReceivedEventListener {
 
     public FalconiaDayEventListener() {
         super(Collections.singleton(Channels.TAVERNE));
+        Rene.getInstance().getJda().getTextChannelById(Channels.TAVERNE.getChannelID())
+                .sendMessage(MESSAGE).queue();
     }
 
     @Override
