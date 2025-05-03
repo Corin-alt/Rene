@@ -15,6 +15,8 @@ public class AngryMessageReceivedEventListener extends AMessageReceivedEventList
 
     @Override
     public void execute(MessageReceivedEvent event) {
+        if (event.getAuthor().isBot()) return;
+
         event.getMessage().addReaction(Emoji.fromUnicode("U+1F621")).queue();
     }
 }

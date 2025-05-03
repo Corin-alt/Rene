@@ -126,6 +126,8 @@ public class EightBallMessageReceivedEventListener extends AMessageReceivedEvent
 
     @Override
     public void execute(MessageReceivedEvent event) {
+        if (event.getAuthor().isBot()) return;
+
         String content = event.getMessage().getContentRaw();
         String emoji8ball = Emoji.fromUnicode("U+1F3B1").getFormatted();
 

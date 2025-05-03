@@ -18,8 +18,6 @@ public abstract class AMessageReceivedEventListener extends AEventListener {
 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
-        if (event.getAuthor().isBot()) return;
-
         if (!canExecute(event.getChannel().getId())) return;
 
         execute(event);

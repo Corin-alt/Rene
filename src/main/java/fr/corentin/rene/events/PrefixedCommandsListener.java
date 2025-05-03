@@ -20,6 +20,8 @@ public class PrefixedCommandsListener extends AEventListener {
 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
+        if (event.getAuthor().isBot()) return;
+
         String guildId = event.getGuild().getId();
         String prefix = rene.getCommandPrefix(guildId);
 
