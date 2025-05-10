@@ -4,7 +4,12 @@ import fr.corentin.rene.database.parent.ADatabaseService;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BirthdayDatabaseService extends ADatabaseService {
     public void createTable() {
@@ -31,14 +36,17 @@ public class BirthdayDatabaseService extends ADatabaseService {
         });
     }
 
-    public List<String> getTodayBirthdays() {
-        List<String> userIds;
+    /**
+     * Get user IDs and birth dates for users whose birthday is today
+     * @return Map of user IDs to their birth dates (as milliseconds since epoch)
+     */
+    public Map<String, Long> getTodayBirthdaysWithDates() {
+        Map<String, Long> userBirthdays = new HashMap<>();
         LocalDate today = LocalDate.now();
 
-        //String sql = "SELECT user_id FROM birthdays WHERE strftime('%d/%m', birthday) = ?";
-        String sql = "SELECT user_id FROM birthdays WHERE strftime('%m-%d', datetime(birthday / 1000, 'unixepoch')) = strftime('%m-%d', ?);";
+        String sql = "SELECT user_id, birthday FROM birthdays WHERE strftime('%m-%d', datetime(birthday / 1000, 'unixepoch')) = strftime('%m-%d', ?);";
 
-        userIds = dbManager.executeQuery(sql,
+        List<Object[]> results = dbManager.executeQuery(sql,
                 pstmt -> {
                     try {
                         pstmt.setString(1, today.toString());
@@ -48,12 +56,27 @@ public class BirthdayDatabaseService extends ADatabaseService {
                 },
                 rs -> {
                     try {
-                        return rs.getString("user_id");
+                        Object[] row = new Object[2];
+                        row[0] = rs.getString("user_id");
+                        row[1] = rs.getLong("birthday");
+                        return row;
                     } catch (SQLException e) {
                         logger.error("Failed to retrieve today's birthdays: " + e.getMessage(), e);
                     }
                     return null;
                 });
-        return userIds;
+
+        for (Object[] row : results) {
+            if (row != null && row[0] != null && row[1] != null) {
+                userBirthdays.put((String) row[0], (Long) row[1]);
+            }
+        }
+
+        return userBirthdays;
+    }
+
+    // Keep the original method for backward compatibility
+    public List<String> getTodayBirthdays() {
+        return new ArrayList<>(getTodayBirthdaysWithDates().keySet());
     }
 }

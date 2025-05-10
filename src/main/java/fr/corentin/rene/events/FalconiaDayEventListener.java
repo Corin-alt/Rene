@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class FalconiaDayEventListener extends AMessageReceivedEventListener {
     private static final String EMOJI = Emoji.fromUnicode("U+1F973").getFormatted();
     public static final String MESSAGE
-            = EMOJI + " Aujourd'hui c'est Falconia Day ! Joyeux Falconia Day à tous ! " + EMOJI;
+            = EMOJI + " Aujourd'hui c'est **Falconia Day** ! Joyeux Falconia Day à tous ! " + EMOJI;
 
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private static final Random random = new Random();
@@ -29,18 +29,18 @@ public class FalconiaDayEventListener extends AMessageReceivedEventListener {
 
     public FalconiaDayEventListener() {
         super(Collections.singleton(Channels.TAVERNE));
-        Rene.getInstance().getJda().getTextChannelById(Channels.TAVERNE.getChannelID())
-                .sendMessage(MESSAGE).queue();
+        TextChannel channel = Rene.getInstance().getJda()
+                .getTextChannelById(Channels.TAVERNE.getChannelID());
+
+        assert channel != null;
+
+        channel.sendMessage(MESSAGE).queue();
+
+        scheduleNextMessage(channel, MESSAGE);
     }
 
     @Override
-    public void execute(MessageReceivedEvent event) {
-        if (!event.getAuthor().isBot()) return;
-
-        if (!event.getMessage().getContentRaw().equalsIgnoreCase(MESSAGE)) return;
-
-        scheduleNextMessage(event.getChannel().asTextChannel(), MESSAGE);
-    }
+    public void execute(MessageReceivedEvent event) {}
 
     private void scheduleNextMessage(TextChannel channel, String messageContent) {
         LocalDateTime triggerTime = generateNextFalconiaDay();
@@ -55,7 +55,7 @@ public class FalconiaDayEventListener extends AMessageReceivedEventListener {
     }
 
     private LocalDateTime generateNextFalconiaDay() {
-        int daysToAdd = random.nextInt(7);
+        int daysToAdd = random.nextInt(5);
         int hour = 6 + random.nextInt(8);
         int minute = random.nextInt(60);
         int second = random.nextInt(60);
