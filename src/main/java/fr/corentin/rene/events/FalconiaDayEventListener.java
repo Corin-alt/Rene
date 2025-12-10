@@ -43,22 +43,24 @@ public class FalconiaDayEventListener extends AMessageReceivedEventListener {
         assert channel != null;
 
         channel.sendMessage(getMessage()).queue();
-
-        scheduleNextMessage(channel, getMessage());
+        scheduleNextMessage(channel);
     }
 
     @Override
     public void execute(MessageReceivedEvent event) {}
 
-    private void scheduleNextMessage(TextChannel channel, String messageContent) {
+    private void scheduleNextMessage(TextChannel channel) {
         LocalDateTime triggerTime = generateNextFalconiaDay();
         long delay = Duration.between(LocalDateTime.now(), triggerTime).toMillis();
 
         System.out.println("[INFO] Next Falconia Day scheduled for : " + triggerTime.format(formatter));
 
         scheduler.schedule(() -> {
-            channel.sendMessage(messageContent).queue();
-            scheduleNextMessage(channel, getMessage());
+            String message = getMessage();
+            System.out.println("[INFO] Sending message: " + (message.contains("PAS") ? "PAS Falconia Day"
+                    : "Falconia Day"));
+            channel.sendMessage(message).queue();
+            scheduleNextMessage(channel);
         }, delay, TimeUnit.MILLISECONDS);
     }
 
