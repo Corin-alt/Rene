@@ -21,15 +21,21 @@ import java.util.concurrent.TimeUnit;
 public class FalconiaDayEventListener extends AMessageReceivedEventListener {
 
 
-    private static final String EMOJI_MSG_CLASSIC = Emoji.fromUnicode("U+1F973").getFormatted();
+    private static final String EMOJI_MSG_CLASSIC = Emoji.fromUnicode("U+1F384").getFormatted();
     public static final String MESSAGE_CLASSIC
-            = EMOJI_MSG_CLASSIC + " Aujourd'hui c'est **Falconia Day** ! Joyeux Falconia Day à tous ! " + EMOJI_MSG_CLASSIC;
+            = EMOJI_MSG_CLASSIC
+            + " 🎅 Høø~ Aujourd’hui c’est ✨ **Nöëℓ Fåℓçøñïå Dã¥** ✨ !! ❄☃ "
+            + "Jøÿëüx Nöëℓ à tøüs 🎁🎄 §[#](https://urlr.me/A4Dc9p)@! ❆✶ "
+            + EMOJI_MSG_CLASSIC;
 
 
-    private static final String EMOJI_MSG_VARIANT = Emoji.fromUnicode("U+1F621").getFormatted();
+    private static final String EMOJI_MSG_VARIANT = Emoji.fromUnicode("U+1F47F").getFormatted();
     public static final String MESSAGE_VARIANT
-            = EMOJI_MSG_VARIANT + " Aujourd'hui ce n'est **PAS Falconia Day** ! Pas de joyeux **Falconia Day** à qui que ce soit ! " + EMOJI_MSG_VARIANT;
-
+            = EMOJI_MSG_VARIANT
+            + " 🎄☠ Aujourd’hui ce n’est **PÄ§ Nöëℓ**… ❌[❄](https://urlr.me/A4Dc9p) "
+            + "Åücün 🎅, Åücün 🎁, åücün **Jøÿëüx Nöëℓ** 😈⛄ §¤µ "
+            + "Lë Grïñçħ å pã§§ë… ❆☃✖ "
+            + EMOJI_MSG_VARIANT;
 
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private static final Random random = new Random();
