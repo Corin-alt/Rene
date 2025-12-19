@@ -3,6 +3,7 @@ package fr.corentin.rene.modules.birthday;
 import fr.corentin.rene.managers.CommandManager;
 import fr.corentin.rene.managers.EventManager;
 import fr.corentin.rene.moduleloading.parent.AModule;
+import fr.corentin.rene.modules.birthday.commands.HeisenbergCommand;
 import fr.corentin.rene.modules.birthday.commands.SendBirthdayCommand;
 import fr.corentin.rene.modules.birthday.events.BirthdayModalListener;
 import fr.corentin.rene.modules.birthday.service.BirthdayDatabaseService;
@@ -21,6 +22,7 @@ public class BirthdayModuleManager extends AModule {
     @Override
     public void registerCommands() {
         CommandManager.getInstance().registerSlashCommand(new BirthdayCommand());
+        CommandManager.getInstance().registerSlashCommand(new HeisenbergCommand());
         CommandManager.getInstance().registerPrefixedCommand(new SendBirthdayCommand(this));
     }
 

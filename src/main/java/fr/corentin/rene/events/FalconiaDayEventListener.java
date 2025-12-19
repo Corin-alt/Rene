@@ -25,14 +25,14 @@ public class FalconiaDayEventListener extends AMessageReceivedEventListener {
     public static final String MESSAGE_CLASSIC
             = EMOJI_MSG_CLASSIC
             + " 🎅 Høø~ Aujourd’hui c’est ✨ **Nöëℓ Fåℓçøñïå Dã¥** ✨ !! ❄☃ "
-            + "Jøÿëüx Nöëℓ à tøüs 🎁🎄 §[#](https://urlr.me/A4Dc9p)@! ❆✶ "
+            + "Jøÿëüx Nöëℓ à tøüs 🎁🎄 §[#](https://urlr.me/ExdQM9)@! ❆✶ "
             + EMOJI_MSG_CLASSIC;
 
 
     private static final String EMOJI_MSG_VARIANT = Emoji.fromUnicode("U+1F47F").getFormatted();
     public static final String MESSAGE_VARIANT
             = EMOJI_MSG_VARIANT
-            + " 🎄☠ Aujourd’hui ce n’est **PÄ§ Nöëℓ**… ❌[❄](https://urlr.me/A4Dc9p) "
+            + " 🎄☠ Aujourd’hui ce n’est **PÄ§ Nöëℓ**… ❌[❄](https://urlr.me/ExdQM9) "
             + "Åücün 🎅, Åücün 🎁, åücün **Jøÿëüx Nöëℓ** 😈⛄ §¤µ "
             + "Lë Grïñçħ å pã§§ë… ❆☃✖ "
             + EMOJI_MSG_VARIANT;
