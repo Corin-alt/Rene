@@ -1,4 +1,4 @@
-package fr.corentin.rene.modules.moderation.commands;
+package fr.corentin.rene.modules.general.commands;
 
 import fr.corentin.rene.commands.Permission;
 import fr.corentin.rene.commands.parent.AInteractionCommand;

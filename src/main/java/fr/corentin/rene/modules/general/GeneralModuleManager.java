@@ -14,6 +14,7 @@ public class GeneralModuleManager extends AModule {
         CommandManager.getInstance().registerSlashCommand(new HeisenbergCommand());
         CommandManager.getInstance().registerSlashCommand(new PingCommand());
         CommandManager.getInstance().registerSlashCommand(new UptimeCommand());
+        CommandManager.getInstance().registerSlashCommand(new PollCommand());
         CommandManager.getInstance().registerUserContextCommand(new AvatarCommand());
         CommandManager.getInstance().registerMessageContextCommand(new PinCommand());
         CommandManager.getInstance().registerMessageContextCommand(new UnpinCommand());
