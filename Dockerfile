@@ -21,7 +21,8 @@ RUN mkdir -p /app/libs && \
     wget https://repo1.maven.org/maven2/org/reflections/reflections/0.10.2/reflections-0.10.2.jar && \
     wget https://repo1.maven.org/maven2/org/javassist/javassist/3.29.2-GA/javassist-3.29.2-GA.jar && \
     wget https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar && \
-    wget https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.42.0.0/sqlite-jdbc-3.42.0.0.jar
+    wget https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.42.0.0/sqlite-jdbc-3.42.0.0.jar && \
+    wget https://repo1.maven.org/maven2/io/github/cdimascio/dotenv-java/3.2.0/dotenv-java-3.2.0.jar
 
 # Copy the source code
 COPY src /app/src
