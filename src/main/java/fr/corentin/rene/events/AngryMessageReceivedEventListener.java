@@ -2,6 +2,7 @@ package fr.corentin.rene.events;
 
 import fr.corentin.rene.events.parent.AMessageReceivedEventListener;
 import fr.corentin.rene.utils.Channels;
+import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 

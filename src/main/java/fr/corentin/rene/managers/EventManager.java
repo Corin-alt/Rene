@@ -58,6 +58,7 @@ public class EventManager {
         jda.addEventListener(new PrefixedCommandsListener());
         jda.addEventListener(new EightBallMessageReceivedEventListener());
         jda.addEventListener(new AngryMessageReceivedEventListener());
+        jda.addEventListener(new UnlockReceivedEventListener());
         jda.addEventListener(new FalconiaDayEventListener());
         moduleEventsListeners.forEach((moduleId, listeners) -> jda.addEventListener(listeners));
     }
