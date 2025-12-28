@@ -29,6 +29,8 @@ COPY src /app/src
 
 # Copy the configuration files
 COPY .env.example /app/.env.example
+# Copy .env file if it exists (you'll need to create this before building)
+COPY .env /app/.env
 
 # Copy the startup script
 COPY start.sh /app/start.sh
