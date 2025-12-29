@@ -3,7 +3,6 @@ package fr.corentin.rene.modules.general;
 import fr.corentin.rene.managers.CommandManager;
 import fr.corentin.rene.moduleloading.parent.AModule;
 import fr.corentin.rene.moduleloading.parent.AModuleConfiguration;
-import fr.corentin.rene.modules.birthday.commands.HeisenbergCommand;
 import fr.corentin.rene.modules.general.commands.*;
 
 public class GeneralModuleManager extends AModule {
