@@ -1,7 +1,6 @@
 package fr.corentin.rene.modules.general.commands;
 
 import fr.corentin.rene.commands.parent.*;
-import fr.corentin.rene.commands.parent.*;
 import fr.corentin.rene.managers.CommandManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;

@@ -4,7 +4,7 @@ public enum UserRole {
     MODERATION ("562386697174646787"),
     OUF_MALADE("562387459174825985");
 
-    private String id;
+    private final String id;
 
     UserRole(String id) {
         this.id = id;

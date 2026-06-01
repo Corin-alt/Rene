@@ -18,7 +18,7 @@ public class DatabaseManager {
     private final Logger logger;
     private final String dbFile;
 
-    public DatabaseManager() {
+    private DatabaseManager() {
         Rene rene = Rene.getInstance();
         this.logger = rene.getLogger();
         this.dbFile = DB_FILENAME_PREFIX + rene.getDataFolder().getPath() + File.separator + DB_FILENAME;
@@ -55,13 +55,13 @@ public class DatabaseManager {
             try {
                 pstmt.setString(1, guildId);
             } catch (SQLException e) {
-                logger.error("Database get prefix error: " + e.getMessage(), e);
+                logger.error("Database get prefix error", e);
             }
         }, rs -> {
             try {
                 return rs.getString("prefix");
             } catch (SQLException e) {
-                logger.error("Database get prefix error: " + e.getMessage(), e);
+                logger.error("Database get prefix error", e);
                 return null;
             }
         });
@@ -77,7 +77,7 @@ public class DatabaseManager {
                 pstmt.setString(2, prefix);
                 pstmt.setString(3, prefix);
             } catch (SQLException e) {
-                logger.error("Database prefix update error: " + e.getMessage(), e);
+                logger.error("Database prefix update error", e);
             }
         });
     }
@@ -89,7 +89,7 @@ public class DatabaseManager {
             parameterSetter.accept(pstmt);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Database update error: " + e.getMessage(), e);
+            logger.error("Database update error", e);
         }
     }
 
@@ -105,7 +105,7 @@ public class DatabaseManager {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Database query error: " + e.getMessage(), e);
+            logger.error("Database query error", e);
         }
         return results;
     }
@@ -121,7 +121,7 @@ public class DatabaseManager {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Database query error: " + e.getMessage(), e);
+            logger.error("Database query error", e);
         }
         return result;
     }

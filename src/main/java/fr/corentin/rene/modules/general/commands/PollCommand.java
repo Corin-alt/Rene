@@ -18,7 +18,7 @@ import static fr.corentin.rene.utils.EmojiUtils.getEmojiForOption;
 import static fr.corentin.rene.utils.EmojiUtils.getYesNoEmojis;
 
 public class PollCommand extends AInteractionCommand {
-    public static final String OPTIONS = "options";
+    private static final String OPTIONS = "options";
 
     public PollCommand() {
         super("sondage", "Créer un nouveau sondage", Permission.ALL, Arrays.asList(
@@ -32,6 +32,9 @@ public class PollCommand extends AInteractionCommand {
         String question = event.getOption("question").getAsString();
         String optionsStr = event.getOption(OPTIONS) != null ? event.getOption(OPTIONS).getAsString() : null;
 
+        String[] options = (optionsStr != null && !optionsStr.trim().isEmpty())
+                ? optionsStr.split(",") : null;
+
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle(question);
         embedBuilder.setColor(Color.CYAN);
@@ -42,12 +45,10 @@ public class PollCommand extends AInteractionCommand {
 
         StringBuilder optionsDescription = new StringBuilder();
 
-        if (optionsStr != null && !optionsStr.trim().isEmpty()) {
-            String[] options = optionsStr.split(",");
+        if (options != null) {
             for (int i = 0; i < options.length; i++) {
-                String trimmedOption = options[i].trim();
                 Emoji emoji = getEmojiForOption(i);
-                optionsDescription.append(emoji.getFormatted()).append(" ").append(trimmedOption).append("\n\n");
+                optionsDescription.append(emoji.getFormatted()).append(" ").append(options[i].trim()).append("\n\n");
             }
         } else {
             Emoji[] emojis = getYesNoEmojis();
@@ -57,16 +58,14 @@ public class PollCommand extends AInteractionCommand {
         embedBuilder.setDescription(optionsDescription.toString());
 
         event.replyEmbeds(embedBuilder.build()).queue(hook -> hook.retrieveOriginal().queue(message -> {
-            if (optionsStr != null && !optionsStr.trim().isEmpty()) {
-                String[] options = optionsStr.split(",");
+            if (options != null) {
                 for (int i = 0; i < options.length; i++) {
-                    Emoji emoji = getEmojiForOption(i);
-                    message.addReaction(emoji).queue();
+                    message.addReaction(getEmojiForOption(i)).queue();
                 }
             } else {
                 Emoji[] emojis = getYesNoEmojis();
-                message.addReaction(emojis[0]).queue(); // Thumbs up for "Yes"
-                message.addReaction(emojis[1]).queue(); // Thumbs down for "No"
+                message.addReaction(emojis[0]).queue();
+                message.addReaction(emojis[1]).queue();
             }
         }));
         return true;

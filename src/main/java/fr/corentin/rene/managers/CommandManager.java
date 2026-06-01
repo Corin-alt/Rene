@@ -22,7 +22,7 @@ public class CommandManager {
     private final JDA jda;
     private final Map<String, ACommand> commands;
 
-    public CommandManager(JDA jda) {
+    private CommandManager(JDA jda) {
         this.jda = jda;
 
         commands = new HashMap<>();
@@ -82,7 +82,7 @@ public class CommandManager {
             return;
         }
 
-        if (command.hasPermission(event.getMember())) {
+        if (!command.hasPermission(event.getMember())) {
             event.reply("Tu n'as pas la permission d'utiliser cette commande !").setEphemeral(true).queue();
         } else {
             command.execute(event);
@@ -98,7 +98,7 @@ public class CommandManager {
             return;
         }
 
-        if (command.hasPermission(event.getMember())) {
+        if (!command.hasPermission(event.getMember())) {
             event.getChannel().sendMessage("Tu n'as pas la permission d'utiliser cette commande !").queue();
         } else {
             command.execute(event, args);

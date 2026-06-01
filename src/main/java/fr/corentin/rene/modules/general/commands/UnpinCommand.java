@@ -19,7 +19,7 @@ public class UnpinCommand extends AMessageInteractionCommand {
         event.getMessageChannel().retrievePinnedMessages().queue(pinnedMessages -> {
             if (pinnedMessages.stream().anyMatch(m -> m.getId().equals(event1.getTarget().getId()))) {
                 event.getMessageChannel()
-                        .pinMessageById(event1.getTarget().getId())
+                        .unpinMessageById(event1.getTarget().getId())
                         .flatMap(v -> event.getHook().sendMessage("Message désépinglé avec succès!").setEphemeral(false))
                         .queue(
                                 success -> {

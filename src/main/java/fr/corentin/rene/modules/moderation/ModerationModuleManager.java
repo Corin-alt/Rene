@@ -1,7 +1,6 @@
 package fr.corentin.rene.modules.moderation;
 
 import fr.corentin.rene.moduleloading.parent.AModuleConfiguration;
-import fr.corentin.rene.modules.general.commands.PollCommand;
 import fr.corentin.rene.managers.CommandManager;
 import fr.corentin.rene.moduleloading.parent.AModule;
 import fr.corentin.rene.modules.moderation.commands.GiveawayCommand;

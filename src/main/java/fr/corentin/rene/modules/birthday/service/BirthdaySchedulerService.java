@@ -65,7 +65,7 @@ public class BirthdaySchedulerService {
 
     public void checkAndSendBirthdayMessages() {
         Map<String, Long> userBirthdays = dbManager.getTodayBirthdaysWithDates();
-        Rene.getInstance().getLogger().info("Found " + userBirthdays.size() + " birthdays today");
+        Rene.getInstance().getLogger().info("Found {} birthdays today", userBirthdays.size());
 
         TextChannel channel = rene.getJda().getTextChannelById(BIRTHDAY_CHANNEL_ID);
 

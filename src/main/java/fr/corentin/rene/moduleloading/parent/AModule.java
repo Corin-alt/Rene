@@ -1,15 +1,8 @@
 package fr.corentin.rene.moduleloading.parent;
 
 import fr.corentin.rene.Rene;
-import fr.corentin.rene.commands.parent.ACommand;
-import fr.corentin.rene.events.parent.AEventListener;
-
-import java.util.List;
-import java.util.Map;
 
 public abstract class AModule {
-    private Map<String, ACommand> commands;
-    private List<AEventListener> listeners;
 
     protected AModule() {
     }

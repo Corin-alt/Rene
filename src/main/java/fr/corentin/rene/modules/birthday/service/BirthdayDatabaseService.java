@@ -4,9 +4,6 @@ import fr.corentin.rene.database.parent.ADatabaseService;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +16,7 @@ public class BirthdayDatabaseService extends ADatabaseService {
                 user_id text NOT NULL UNIQUE,
                 birthday date NOT NULL
                 );""";
-        dbManager.executeUpdate(sql, pstmt -> {
-        });
+        dbManager.executeUpdate(sql, pstmt -> {});
     }
 
     public void insertBirthday(String userId, long birthday) {
@@ -31,15 +27,11 @@ public class BirthdayDatabaseService extends ADatabaseService {
                 pstmt.setLong(2, birthday);
                 pstmt.setLong(3, birthday);
             } catch (SQLException e) {
-                logger.error("Failed to insert/update birthday: " + e.getMessage(), e);
+                logger.error("Failed to insert/update birthday", e);
             }
         });
     }
 
-    /**
-     * Get user IDs and birth dates for users whose birthday is today
-     * @return Map of user IDs to their birth dates (as milliseconds since epoch)
-     */
     public Map<String, Long> getTodayBirthdaysWithDates() {
         Map<String, Long> userBirthdays = new HashMap<>();
         LocalDate today = LocalDate.now();
@@ -51,17 +43,14 @@ public class BirthdayDatabaseService extends ADatabaseService {
                     try {
                         pstmt.setString(1, today.toString());
                     } catch (SQLException e) {
-                        logger.error("Failed to retrieve today's birthdays: " + e.getMessage(), e);
+                        logger.error("Failed to retrieve today's birthdays", e);
                     }
                 },
                 rs -> {
                     try {
-                        Object[] row = new Object[2];
-                        row[0] = rs.getString("user_id");
-                        row[1] = rs.getLong("birthday");
-                        return row;
+                        return new Object[]{rs.getString("user_id"), rs.getLong("birthday")};
                     } catch (SQLException e) {
-                        logger.error("Failed to retrieve today's birthdays: " + e.getMessage(), e);
+                        logger.error("Failed to read birthday result", e);
                     }
                     return null;
                 });
@@ -75,8 +64,7 @@ public class BirthdayDatabaseService extends ADatabaseService {
         return userBirthdays;
     }
 
-    // Keep the original method for backward compatibility
     public List<String> getTodayBirthdays() {
-        return new ArrayList<>(getTodayBirthdaysWithDates().keySet());
+        return List.copyOf(getTodayBirthdaysWithDates().keySet());
     }
 }

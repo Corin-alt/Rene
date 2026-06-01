@@ -5,7 +5,6 @@ import fr.corentin.rene.managers.DatabaseManager;
 import fr.corentin.rene.managers.EventManager;
 import fr.corentin.rene.managers.PropertyManager;
 import fr.corentin.rene.moduleloading.ModuleManager;
-import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;

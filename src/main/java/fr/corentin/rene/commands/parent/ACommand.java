@@ -14,18 +14,10 @@ public abstract class ACommand {
         this.permission = permission;
     }
 
-    /**
-     * Checks if the member has the required permission to execute the command.
-     *
-     * @param member The SlashCommandInteractionEvent provided by JDA when the command is invoked.
-     * @return true if the member has the required permission, false otherwise.
-     */
     public boolean hasPermission(Member member) {
-        return !switch (permission) {
+        return switch (permission) {
             case ALL -> true;
-            case ADMIN ->
-                // Check if the member has the "ADMIN" role or equivalent.
-                    member.hasPermission(net.dv8tion.jda.api.Permission.ADMINISTRATOR);
+            case ADMIN -> member.hasPermission(net.dv8tion.jda.api.Permission.ADMINISTRATOR);
         };
     }
 

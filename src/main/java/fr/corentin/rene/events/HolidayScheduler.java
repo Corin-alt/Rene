@@ -7,6 +7,8 @@ import com.google.gson.JsonObject;
 import fr.corentin.rene.Rene;
 import fr.corentin.rene.utils.Channels;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.Reader;
@@ -22,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 public class HolidayScheduler {
 
+    private static final Logger logger = LoggerFactory.getLogger(HolidayScheduler.class);
     private static final ZoneId ZONE_PARIS = ZoneId.of("Europe/Paris");
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private static final Random random = new Random();
@@ -33,7 +36,7 @@ public class HolidayScheduler {
                 .getTextChannelById(Channels.TAVERNE.getChannelID());
 
         if (channel == null) {
-            System.out.println("[WARN] Could not find TAVERNE channel for holiday scheduler");
+            logger.warn("Could not find TAVERNE channel for holiday scheduler");
             return;
         }
 
@@ -49,7 +52,7 @@ public class HolidayScheduler {
             }
 
             if (holiday.date.isEqual(today)) {
-                System.out.println("[INFO] Today is a holiday, sending now: " + holiday.date);
+                logger.info("Today is a holiday, sending now: {}", holiday.date);
                 channel.sendMessage(holiday.message).queue();
                 scheduled++;
                 continue;
@@ -64,15 +67,15 @@ public class HolidayScheduler {
             String message = holiday.message;
 
             scheduler.schedule(() -> {
-                System.out.println("[INFO] Sending holiday message for " + holiday.date);
+                logger.info("Sending holiday message for {}", holiday.date);
                 channel.sendMessage(message).queue();
             }, delay, TimeUnit.MILLISECONDS);
 
-            System.out.println("[INFO] Holiday scheduled for " + triggerTime.format(formatter) + " : " + holiday.date);
+            logger.info("Holiday scheduled for {} : {}", triggerTime.format(formatter), holiday.date);
             scheduled++;
         }
 
-        System.out.println("[INFO] " + scheduled + " holiday messages scheduled");
+        logger.info("{} holiday messages scheduled", scheduled);
     }
 
     private List<Holiday> loadHolidays() {
@@ -80,7 +83,7 @@ public class HolidayScheduler {
         File configFile = new File(Rene.getInstance().getDataFolder(), CONFIG_FILENAME);
 
         if (!configFile.exists()) {
-            System.out.println("[WARN] Holiday config file not found: " + configFile.getPath());
+            logger.warn("Holiday config file not found: {}", configFile.getPath());
             return holidays;
         }
 
@@ -98,9 +101,9 @@ public class HolidayScheduler {
                 holidays.add(new Holiday(date, message));
             }
 
-            System.out.println("[INFO] Loaded " + holidays.size() + " holidays from config");
+            logger.info("Loaded {} holidays from config", holidays.size());
         } catch (Exception e) {
-            System.out.println("[ERROR] Failed to load holiday config: " + e.getMessage());
+            logger.error("Failed to load holiday config", e);
         }
 
         return holidays;

@@ -6,6 +6,8 @@ import fr.corentin.rene.utils.Channels;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +18,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class FalconiaDayEventListener extends AMessageReceivedEventListener {
+
+    private static final Logger logger = LoggerFactory.getLogger(FalconiaDayEventListener.class);
 
     private static final String EMOJI_MSG_CLASSIC = Emoji.fromUnicode("U+1F973").getFormatted();
     public static final String MESSAGE_CLASSIC
@@ -37,7 +41,10 @@ public class FalconiaDayEventListener extends AMessageReceivedEventListener {
         TextChannel channel = Rene.getInstance().getJda()
                 .getTextChannelById(Channels.TAVERNE.getChannelID());
 
-        assert channel != null;
+        if (channel == null) {
+            logger.warn("Could not find TAVERNE channel for Falconia Day scheduler");
+            return;
+        }
 
         scheduleNextMessage(channel);
     }
@@ -49,12 +56,11 @@ public class FalconiaDayEventListener extends AMessageReceivedEventListener {
         ZonedDateTime triggerTime = generateNextFalconiaDay();
         long delay = Duration.between(ZonedDateTime.now(ZONE_PARIS), triggerTime).toMillis();
 
-        System.out.println("[INFO] Next Falconia Day scheduled for : " + triggerTime.format(formatter));
+        logger.info("Next Falconia Day scheduled for : {}", triggerTime.format(formatter));
 
         scheduler.schedule(() -> {
             String message = getMessage();
-            System.out.println("[INFO] Sending message: " + (message.contains("PAS") ? "PAS Falconia Day"
-                    : "Falconia Day"));
+            logger.info("Sending message: {}", message.contains("PAS") ? "PAS Falconia Day" : "Falconia Day");
             channel.sendMessage(message).queue();
             scheduleNextMessage(channel);
         }, delay, TimeUnit.MILLISECONDS);

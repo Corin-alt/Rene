@@ -16,14 +16,13 @@ import java.util.Objects;
 import java.util.Random;
 
 public class GiveawayCommand extends AInteractionCommand {
-    public static final String OPTIONS = "options";
+    private static final Random random = new Random();
 
     public GiveawayCommand() {
         super("giveaway", "Tire une personne au hasard parmi les réactions", Permission.ADMIN, List.of(
                 new OptionData(OptionType.STRING, "messageid", "L'ID du message", true),
                 new OptionData(OptionType.STRING, "emoji", "L'emoji", true)
         ));
-        System.out.println("-");
     }
 
     @Override
@@ -43,15 +42,15 @@ public class GiveawayCommand extends AInteractionCommand {
                     .toList();
 
             if (validUsers.isEmpty()) {
-                event.getHook().editOriginal("❌ No users have reacted with this emoji.").queue();
+                event.getHook().editOriginal("Aucun utilisateur n'a réagi avec cet emoji.").queue();
                 return;
             }
 
-            User winner = validUsers.get(new Random().nextInt(validUsers.size()));
+            User winner = validUsers.get(random.nextInt(validUsers.size()));
 
             channel.retrieveMessageById(messageID).queue(message -> {
                 EmbedBuilder embed = new EmbedBuilder()
-                        .setTitle("🎉 Giveaway - Résultat")
+                        .setTitle("Giveaway - Résultat")
                         .setDescription("**Gagnant :** " + winner.getAsMention())
                         .addField("Participants", String.valueOf(validUsers.size()), true)
                         .setColor(Color.GREEN)
@@ -60,13 +59,12 @@ public class GiveawayCommand extends AInteractionCommand {
                 event.getHook().editOriginalEmbeds(embed.build()).queue();
             });
         }, error -> {
-            event.getHook().editOriginal("❌ Error: " +
-                    "Unable to retrieve reactions. Please check the message ID and emoji.").queue();
+            event.getHook().editOriginal("Erreur : " +
+                    "Impossible de récupérer les réactions. Vérifie l'ID du message et l'emoji.").queue();
         });
 
         return true;
     }
-
 
     private Emoji parseEmoji(String emojiStr) {
         if (emojiStr.matches("<a?:\\w+:\\d+>")) {

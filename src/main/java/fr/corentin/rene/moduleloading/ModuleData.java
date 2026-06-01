@@ -56,14 +56,15 @@ public class ModuleData {
         try {
             File jsonConfigFile = new File(dataFolder.getCanonicalPath() + File.separator + AModuleConfiguration.FILENAME + ".json");
             if (jsonConfigFile.exists()) {
-                Reader reader = Files.newBufferedReader(Paths.get(jsonConfigFile.getCanonicalPath()));
-                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-                configuration = gson.fromJson(reader, configuration.getClass());
+                try (Reader reader = Files.newBufferedReader(Paths.get(jsonConfigFile.getCanonicalPath()))) {
+                    Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+                    configuration = gson.fromJson(reader, configuration.getClass());
+                }
             }
             configuration.setDataFolder(dataFolder);
             configuration.save();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to generate config file for module {}", module.getClass().getSimpleName(), e);
         }
     }
 }
