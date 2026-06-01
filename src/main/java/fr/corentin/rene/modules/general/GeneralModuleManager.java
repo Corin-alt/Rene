@@ -10,7 +10,6 @@ public class GeneralModuleManager extends AModule {
     @Override
     public void registerCommands() {
         CommandManager.getInstance().registerSlashCommand(new HelpCommand());
-        CommandManager.getInstance().registerSlashCommand(new HeisenbergCommand());
         CommandManager.getInstance().registerSlashCommand(new PingCommand());
         CommandManager.getInstance().registerSlashCommand(new UptimeCommand());
         CommandManager.getInstance().registerSlashCommand(new PollCommand());
