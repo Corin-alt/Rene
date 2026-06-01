@@ -44,6 +44,9 @@ RUN javac -cp "/app/libs/*" -d /app/out $(find /app/src -name "*.java")
 RUN mkdir -p /app/rene-data && \
     echo "# Bot properties" > /app/rene-data/bot.properties
 
+# Copy the holidays config
+COPY rene-data/holidays.json /app/rene-data/holidays.json
+
 # Expose the data folder as a volume
 VOLUME ["/app/rene-data"]
 
