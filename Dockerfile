@@ -44,8 +44,8 @@ RUN javac -cp "/app/libs/*" -d /app/out $(find /app/src -name "*.java")
 RUN mkdir -p /app/rene-data && \
     echo "# Bot properties" > /app/rene-data/bot.properties
 
-# Copy the holidays config
-COPY src/main/resources/holidays.json /app/rene-data/holidays.json
+# Copy the holidays config to a build-time location (outside the volume)
+COPY src/main/resources/holidays.json /app/defaults/holidays.json
 
 # Expose the data folder as a volume
 VOLUME ["/app/rene-data"]

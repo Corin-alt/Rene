@@ -1,7 +1,12 @@
 #!/bin/sh
 
 echo "Starting Rene..."
-echo "Checking for token..."
+
+# Copy default configs into the data volume if they don't exist yet
+if [ ! -f /app/rene-data/holidays.json ] && [ -f /app/defaults/holidays.json ]; then
+  cp /app/defaults/holidays.json /app/rene-data/holidays.json
+  echo "Copied default holidays.json into rene-data."
+fi
 
 while true; do
   echo "[$(date)] Starting Rene bot..."
