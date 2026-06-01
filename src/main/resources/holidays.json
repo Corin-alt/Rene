@@ -1,0 +1,128 @@
+{
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "message": "🎉 Bonne année à tous ! **Jour de l'An** ! Que cette nouvelle année vous apporte bonheur et réussite ! 🥳🍾"
+    },
+    {
+      "date": "2026-01-06",
+      "message": "👑 Aujourd'hui c'est l'**Épiphanie** ! Qui aura la fève dans la galette des rois ? 🥧✨"
+    },
+    {
+      "date": "2026-02-02",
+      "message": "🥞 Aujourd'hui c'est la **Chandeleur** ! Faites sauter les crêpes ! 🍳✨"
+    },
+    {
+      "date": "2026-02-14",
+      "message": "💕 Aujourd'hui c'est la **Saint-Valentin** ! Bonne fête à tous les amoureux ! 💘🌹"
+    },
+    {
+      "date": "2026-02-17",
+      "message": "🎭 Aujourd'hui c'est **Mardi Gras** ! Sortez les déguisements et les beignets ! 🎉🍩"
+    },
+    {
+      "date": "2026-03-01",
+      "message": "🎀 C'est le mois de **mars** ! Mois de sensibilisation à l'**endométriose**. Informez-vous et soutenez celles qui en souffrent ! 💛"
+    },
+    {
+      "date": "2026-03-08",
+      "message": "💜 Aujourd'hui c'est la **Journée internationale des droits des femmes**. Égalité, respect, solidarité ! ✊🌸"
+    },
+    {
+      "date": "2026-03-17",
+      "message": "☘️ Aujourd'hui c'est la **Saint-Patrick** ! Sláinte ! 🍀🇮🇪"
+    },
+    {
+      "date": "2026-04-05",
+      "message": "🐣 Aujourd'hui c'est **Pâques** ! Joyeuses Pâques à tous ! Bonne chasse aux œufs ! 🐰🍫"
+    },
+    {
+      "date": "2026-04-06",
+      "message": "🐣 Aujourd'hui c'est le **Lundi de Pâques** ! Profitez bien de ce jour férié ! 🌷"
+    },
+    {
+      "date": "2026-04-22",
+      "message": "🌍 Aujourd'hui c'est la **Journée de la Terre** ! Prenons soin de notre planète ! 🌱♻️"
+    },
+    {
+      "date": "2026-05-01",
+      "message": "💐 Aujourd'hui c'est la **Fête du Travail** ! Bon 1er Mai à tous ! 🌼 N'oubliez pas le muguet ! 🍀"
+    },
+    {
+      "date": "2026-05-08",
+      "message": "🇫🇷 Aujourd'hui c'est le **8 Mai**, jour de la **Victoire de 1945**. N'oublions jamais. 🕊️"
+    },
+    {
+      "date": "2026-05-14",
+      "message": "✝️ Aujourd'hui c'est l'**Ascension** ! Profitez bien de ce jour férié ! ☀️"
+    },
+    {
+      "date": "2026-05-24",
+      "message": "✨ Aujourd'hui c'est la **Pentecôte** ! Bon dimanche à tous ! 🌿"
+    },
+    {
+      "date": "2026-05-25",
+      "message": "🌿 Aujourd'hui c'est le **Lundi de Pentecôte** ! Profitez de ce long week-end ! ☀️"
+    },
+    {
+      "date": "2026-05-31",
+      "message": "💐 Aujourd'hui c'est la **Fête des Mères** ! Bonne fête à toutes les mamans ! 🥰❤️"
+    },
+    {
+      "date": "2026-06-01",
+      "message": "🏳️‍🌈 C'est le mois de **juin**, le **Mois des Fiertés** ! Célébrons la diversité et l'amour sous toutes ses formes ! 🌈"
+    },
+    {
+      "date": "2026-06-07",
+      "message": "👵👴 Aujourd'hui c'est la **Fête des Grands-Mères et des Grands-Pères** ! Bonne fête à tous les grands-parents ! 🥰💕"
+    },
+    {
+      "date": "2026-06-21",
+      "message": "🎵 Aujourd'hui c'est la **Fête de la Musique** ! Sortez, écoutez, dansez ! 🎶🎸\n\n👨‍👧‍👦 Et aussi la **Fête des Pères** ! Bonne fête à tous les papas ! 🎉❤️"
+    },
+    {
+      "date": "2026-07-14",
+      "message": "🇫🇷 Aujourd'hui c'est le **14 Juillet** ! Bonne Fête nationale à tous ! 🎆🎇"
+    },
+    {
+      "date": "2026-08-15",
+      "message": "⛪ Aujourd'hui c'est l'**Assomption** ! Bon 15 août à tous ! ☀️"
+    },
+    {
+      "date": "2026-09-19",
+      "message": "🏛️ Ce week-end, ce sont les **Journées européennes du patrimoine** ! Profitez-en pour découvrir des lieux exceptionnels ! 🏰"
+    },
+    {
+      "date": "2026-10-01",
+      "message": "🎀 C'est **Octobre Rose** ! Mois de sensibilisation au dépistage du cancer du sein. Pensez-y et parlez-en autour de vous ! 💪"
+    },
+    {
+      "date": "2026-10-31",
+      "message": "🎃 Aujourd'hui c'est **Halloween** ! Trick or treat ? 👻🦇"
+    },
+    {
+      "date": "2026-11-01",
+      "message": "🕯️ Aujourd'hui c'est la **Toussaint**. Une pensée pour ceux qui nous ont quittés. 🌸\n\n🥸 C'est aussi le début de **Movember** ! Laissez pousser la moustache pour sensibiliser à la santé masculine ! 🧔"
+    },
+    {
+      "date": "2026-11-11",
+      "message": "🕊️ Aujourd'hui c'est le **11 Novembre**, jour de l'**Armistice de 1918**. N'oublions jamais. 🇫🇷"
+    },
+    {
+      "date": "2026-12-06",
+      "message": "🎅 Aujourd'hui c'est la **Saint-Nicolas** ! Bonne fête à tous, surtout dans l'Est ! 🍬🎁"
+    },
+    {
+      "date": "2026-12-24",
+      "message": "🎄 Aujourd'hui c'est le **Réveillon de Noël** ! Passez une merveilleuse soirée en famille ! 🌟✨"
+    },
+    {
+      "date": "2026-12-25",
+      "message": "🎅 **Joyeux Noël** à tous ! 🎁🎄 Que cette journée soit remplie de joie et de bonheur ! ❤️"
+    },
+    {
+      "date": "2026-12-31",
+      "message": "🥂 Aujourd'hui c'est la **Saint-Sylvestre** ! Bonne dernière journée de l'année et bon réveillon à tous ! 🎆🎉"
+    }
+  ]
+}

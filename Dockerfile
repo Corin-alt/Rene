@@ -45,7 +45,7 @@ RUN mkdir -p /app/rene-data && \
     echo "# Bot properties" > /app/rene-data/bot.properties
 
 # Copy the holidays config
-COPY rene-data/holidays.json /app/rene-data/holidays.json
+COPY src/main/resources/holidays.json /app/rene-data/holidays.json
 
 # Expose the data folder as a volume
 VOLUME ["/app/rene-data"]

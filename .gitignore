@@ -42,6 +42,9 @@ bin/
 ### VS Code ###
 .vscode/
 
+### Claude ###
+.claude/
+
 ### Mac OS ###
 .DS_Store
 
