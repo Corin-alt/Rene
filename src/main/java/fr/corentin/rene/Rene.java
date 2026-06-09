@@ -56,7 +56,7 @@ public class Rene {
 
     private String loadToken() {
         // D'abord, essayer de charger le token depuis la variable d'environnement
-        String token = System.getenv("BOT_TOKEN");
+        String token = "";
         if (token != null && !token.trim().isEmpty()) {
             logger.info("Using bot token from environment variable");
             return token;

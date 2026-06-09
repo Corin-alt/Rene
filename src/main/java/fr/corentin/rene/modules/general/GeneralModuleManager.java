@@ -16,6 +16,7 @@ public class GeneralModuleManager extends AModule {
         CommandManager.getInstance().registerUserContextCommand(new AvatarCommand());
         CommandManager.getInstance().registerMessageContextCommand(new PinCommand());
         CommandManager.getInstance().registerMessageContextCommand(new UnpinCommand());
+        CommandManager.getInstance().registerSlashCommand(new MsgCommand());
 
     }
 
