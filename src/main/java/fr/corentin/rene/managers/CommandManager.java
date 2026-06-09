@@ -66,7 +66,7 @@ public class CommandManager {
             commandData.setDefaultPermissions(DefaultMemberPermissions.DISABLED);
         }
 
-        jda.getGuilds().get(0).upsertCommand(commandData).queue();
+        jda.getGuilds().forEach(guild -> guild.upsertCommand(commandData).queue());
     }
 
     public void unregisterCommand(ACommand command) {
