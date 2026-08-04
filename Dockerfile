@@ -1,54 +1,51 @@
-# Use a Java base image
-FROM eclipse-temurin:17-jdk
+# Build stage
+FROM eclipse-temurin:17-jdk AS builder
 
-# Set the working directory
 WORKDIR /app
 
-# Install necessary tools
+# Copy Gradle wrapper and build files
+COPY gradlew gradlew.bat ./
+COPY gradle ./gradle
+COPY build.gradle.kts settings.gradle.kts* ./
+
+# Make gradlew executable
+RUN chmod +x gradlew
+
+# Download dependencies first (cached layer)
+RUN ./gradlew dependencies --no-daemon || true
+
+# Copy source code and resources
+COPY src ./src
+
+# Build the shadow JAR
+RUN ./gradlew shadowJar --no-daemon
+
+# Runtime stage
+FROM eclipse-temurin:17-jre
+
+WORKDIR /app
+
 RUN apt-get update && apt-get install -y \
-    wget \
     dos2unix \
     && rm -rf /var/lib/apt/lists/*
 
-# Create necessary directories
-RUN mkdir -p /app/out /app/libs /app/rene-data
+RUN mkdir -p /app/rene-data /app/defaults
 
-# Download JDA and its dependencies
-RUN mkdir -p /app/libs && \
-    cd /app/libs && \
-    wget https://github.com/discord-jda/JDA/releases/download/v5.3.2/JDA-5.3.2-withDependencies.jar && \
-    wget https://repo1.maven.org/maven2/org/slf4j/slf4j-simple/2.0.7/slf4j-simple-2.0.7.jar && \
-    wget https://repo1.maven.org/maven2/org/reflections/reflections/0.10.2/reflections-0.10.2.jar && \
-    wget https://repo1.maven.org/maven2/org/javassist/javassist/3.29.2-GA/javassist-3.29.2-GA.jar && \
-    wget https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar && \
-    wget https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.42.0.0/sqlite-jdbc-3.42.0.0.jar && \
-    wget https://repo1.maven.org/maven2/io/github/cdimascio/dotenv-java/3.2.0/dotenv-java-3.2.0.jar
+# Copy the shadow JAR from builder
+COPY --from=builder /app/build/libs/*.jar /app/rene.jar
 
-# Copy the source code
-COPY src /app/src
-
-# Copy the configuration files
+# Copy configuration files
 COPY .env.example /app/.env.example
-# Copy .env file if it exists (you'll need to create this before building)
 COPY .env /app/.env
 
-# Copy the startup script
-COPY start.sh /app/start.sh
-# Convert from DOS to UNIX format to avoid CRLF issues
-RUN dos2unix /app/start.sh && chmod +x /app/start.sh
-
-# Compile the source code
-RUN javac -cp "/app/libs/*" -d /app/out $(find /app/src -name "*.java")
-
-# Create the data folder and empty properties file (fallback)
-RUN mkdir -p /app/rene-data && \
-    echo "# Bot properties" > /app/rene-data/bot.properties
-
-# Copy the holidays config to a build-time location (outside the volume)
+# Copy default resources
 COPY src/main/resources/holidays.json /app/defaults/holidays.json
 
-# Expose the data folder as a volume
+# Copy and prepare startup script
+COPY start.sh /app/start.sh
+RUN dos2unix /app/start.sh && chmod +x /app/start.sh
+
+# Data volume
 VOLUME ["/app/rene-data"]
 
-# Run the startup script
 CMD ["/app/start.sh"]

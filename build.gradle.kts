@@ -41,6 +41,6 @@ tasks.test {
 
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = "fr.corentin.Rene"
+        attributes["Main-Class"] = "fr.corentin.rene.Rene"
     }
 }

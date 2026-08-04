@@ -11,8 +11,7 @@ fi
 while true; do
   echo "[$(date)] Starting Rene bot..."
 
-  # Launch the bot with the appropriate classpath
-  java -cp "/app/out:/app/libs/*" fr.corentin.rene.Rene
+  java -jar /app/rene.jar
 
   # Get the exit code
   EXIT_CODE=$?
