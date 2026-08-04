@@ -1,0 +1,297 @@
+{
+  "A_ACCENT": [
+    "\"à\" : Préposition. À utiliser lorsque c'est une préposition (à Paris, à côté).",
+    "\"a\" : Verbe avoir. Si vous pouvez remplacer par \"avait\" dans votre phrase et que ça a du sens, alors c'est celui-ci qu'il faut utiliser.",
+    "  - \"Il a faim\" -> \"Il avait faim\" -> OK -> a (verbe)",
+    "  - \"Il va à Paris\" -> \"Il va avait Paris\" -> absurde -> à (préposition)"
+  ],
+  "CE_SE": [
+    "\"se\" : Pronom personnel réfléchi à la 3e personne, il est généralement suivi d'un verbe (se laver, se lever).",
+    "\"ce\" : Déterminant démonstratif suivi d'un nom commun ou d'un adjectif + nom, peut être remplacé par l'article \"le\" ou \"un\".",
+    "  Aussi pronom démonstratif devant le verbe \"être\" (ce sera bien),",
+    "  ou suivi d'un pronom relatif : que, qui, dont (ce que je veux).",
+    "  - \"Il se lave\" -> pronom réfléchi -> se",
+    "  - \"Ce livre\" -> \"le livre\" -> OK -> ce"
+  ],
+  "CA_SA": [
+    "\"ça\" : Pronom démonstratif. Si vous pouvez remplacer par \"cela\" dans votre phrase et que cela a du sens, alors c'est celui-ci qu'il faut utiliser.",
+    "\"sa\" : Adjectif possessif (sa maison = la sienne).",
+    "  - \"Ça m'énerve\" -> \"Cela m'énerve\" -> OK -> ça",
+    "  - \"Sa voiture\" -> \"Cela voiture\" -> absurde -> sa"
+  ],
+  "CES_SES": [
+    "\"ces\" : Adjectif démonstratif (pluriel de : \"ce\", \"cet\", \"cette\"). On désigne, on montre : ces gens-là.",
+    "\"ses\" : Adjectif possessif (pluriel de \"son\", \"sa\"). On peut dire : les siens / les siennes.",
+    "  - \"ses chaussures\" -> \"les siennes\" -> OK -> ses",
+    "  - \"ces chaussures-là\" -> on montre -> ces"
+  ],
+  "C_EST_S_EST": [
+    "\"c'est\" : Contraction de \"cela est\" (verbe être).",
+    "\"s'est\" : À mettre devant les verbes pronominaux à la 3e personne du singulier.",
+    "Astuce : remplacez \"il\" par \"je\". Si ça a du sens avec \"me suis\", c'est \"s'est\".",
+    "  - \"Il s'est trompé\" -> \"Je me suis trompé\" -> OK -> s'est",
+    "  - \"C'est beau\" -> \"Cela est beau\" -> OK -> c'est"
+  ],
+  "ET_EST": [
+    "\"est\" : Verbe être conjugué (il est grand).",
+    "\"et\" : Conjonction de coordination qui relie deux éléments (toi et moi).",
+    "Astuce : remplacez par \"était\". Si ça a du sens, c'est \"est\".",
+    "  - \"Il est content\" -> \"Il était content\" -> OK -> est",
+    "  - \"Paul et Marie\" -> \"Paul était Marie\" -> absurde -> et"
+  ],
+  "OU_OÙ": [
+    "\"ou\" : Conjonction de choix entre deux options (fromage ou dessert).",
+    "\"où\" : Adverbe de lieu ou de temps (Où vas-tu ? Le jour où...).",
+    "Astuce : remplacez par \"ou bien\". Si ça a du sens, c'est \"ou\".",
+    "  - \"Thé ou café\" -> \"Thé ou bien café\" -> OK -> ou",
+    "  - \"Où habites-tu\" -> \"Ou bien habites-tu\" -> absurde -> où"
+  ],
+  "ON_ONT": [
+    "\"ont\" : Verbe avoir conjugué à la 3e personne du pluriel (ils ont faim).",
+    "\"on\" : Pronom personnel indéfini sujet (on y va).",
+    "Astuce : remplacez par \"avaient\". Si ça a du sens, c'est \"ont\".",
+    "  - \"Ils ont faim\" -> \"Ils avaient faim\" -> OK -> ont",
+    "  - \"On y va\" -> \"Avaient y va\" -> absurde -> on"
+  ],
+  "SON_SONT": [
+    "\"sont\" : Verbe être conjugué à la 3e personne du pluriel (ils sont partis).",
+    "\"son\" : Adjectif possessif (son chapeau = le sien).",
+    "Astuce : remplacez par \"étaient\". Si ça a du sens, c'est \"sont\".",
+    "  - \"Ils sont là\" -> \"Ils étaient là\" -> OK -> sont",
+    "  - \"Son chapeau\" -> \"Étaient chapeau\" -> absurde -> son"
+  ],
+  "MA_M_A": [
+    "\"m'a\" : Contraction de \"me a\" (verbe avoir). Il m'a dit = Il me a dit.",
+    "\"ma\" : Adjectif possessif (ma voiture = la mienne).",
+    "Astuce : remplacez par \"m'avait\". Si ça a du sens, c'est \"m'a\".",
+    "  - \"Il m'a appelé\" -> \"Il m'avait appelé\" -> OK -> m'a",
+    "  - \"Ma voiture\" -> \"M'avait voiture\" -> absurde -> ma"
+  ],
+  "TA_T_A": [
+    "\"t'a\" : Contraction de \"te a\" (verbe avoir). Il t'a vu = Il te a vu.",
+    "\"ta\" : Adjectif possessif (ta maison = la tienne).",
+    "Astuce : remplacez par \"t'avait\". Si ça a du sens, c'est \"t'a\".",
+    "  - \"Il t'a vu\" -> \"Il t'avait vu\" -> OK -> t'a",
+    "  - \"Ta maison\" -> \"T'avait maison\" -> absurde -> ta"
+  ],
+  "PEU_PEUT_PEUX": [
+    "\"peut\"/\"peux\" : Verbe pouvoir (il peut, je peux, tu peux).",
+    "\"peu\" : Adverbe de quantité (un peu, peu de temps).",
+    "Astuce : remplacez par \"pouvait\". Si ça a du sens, c'est \"peut\".",
+    "  - \"Il peut venir\" -> \"Il pouvait venir\" -> OK -> peut",
+    "  - \"Un peu de lait\" -> \"Un pouvait de lait\" -> absurde -> peu"
+  ],
+  "LEUR_LEURS": [
+    "\"leur\" (sans s) devant un verbe : Pronom personnel (Je leur parle).",
+    "\"leur/leurs\" devant un nom : Adjectif possessif, accordé avec le nom :",
+    "  - \"leur maison\" (une seule) / \"leurs maisons\" (plusieurs)."
+  ],
+  "QUEL_QU_ELLE": [
+    "\"quelle\" : Adjectif interrogatif/exclamatif (Quelle heure est-il ?).",
+    "\"qu'elle\" : Contraction de \"que elle\" (Je sais qu'elle viendra).",
+    "Astuce : remplacez par \"qu'il\". Si ça a du sens, c'est \"qu'elle\".",
+    "  - \"Je sais qu'elle vient\" -> \"Je sais qu'il vient\" -> OK -> qu'elle",
+    "  - \"Quelle robe\" -> \"Qu'il robe\" -> absurde -> quelle"
+  ],
+  "LA_LA": [
+    "\"la\" : Article défini (la maison) ou pronom (je la vois).",
+    "\"là\" : Adverbe de lieu (je suis là, là-bas).",
+    "\"l'a\" : Contraction de \"le/la a\" (il l'a vu).",
+    "Astuce pour l'a : remplacez par \"l'avait\". Si ça a du sens, c'est \"l'a\"."
+  ],
+  "ER_E": [
+    "Terminaison \"-er\" : Infinitif du verbe (manger, chanter, aller).",
+    "Terminaison \"-é\" : Participe passé (mangé, chanté, allé).",
+    "Astuce : remplacez par un verbe du 3e groupe comme \"vendre/vendu\" :",
+    "  - \"Il faut manger\" -> \"Il faut vendre\" -> OK -> -er (infinitif)",
+    "  - \"J'ai mangé\" -> \"J'ai vendu\" -> OK -> -é (participe passé)"
+  ],
+  "MON_M_ONT": [
+    "\"mon\" : Adjectif possessif (mon livre = le mien).",
+    "\"m'ont\" : Contraction de \"me ont\" (ils m'ont dit).",
+    "Astuce : remplacez par \"m'avaient\". Si ça a du sens, c'est \"m'ont\"."
+  ],
+  "TON_T_ONT": [
+    "\"ton\" : Adjectif possessif (ton livre = le tien).",
+    "\"t'ont\" : Contraction de \"te ont\" (ils t'ont dit).",
+    "Astuce : remplacez par \"t'avaient\". Si ça a du sens, c'est \"t'ont\"."
+  ],
+  "DANS_D_EN": [
+    "\"dans\" : Préposition de lieu ou de temps (dans la maison, dans 5 minutes).",
+    "\"d'en\" : Contraction de \"de en\" (je viens d'en parler)."
+  ],
+  "QUAND_QUANT": [
+    "\"quand\" : Conjonction/adverbe de temps (Quand viens-tu ?).",
+    "\"quant\" : Locution \"quant à\" = \"en ce qui concerne\" (Quant à moi...).",
+    "\"qu'en\" : Contraction de \"que en\" (Qu'en penses-tu ?)."
+  ],
+  "ACCORD_NOMBRE": [
+    "Règle : Le nom et son déterminant/adjectif doivent s'accorder en nombre.",
+    "Singulier : un chat noir / Pluriel : des chats noirs."
+  ],
+  "ACCORD_GENRE": [
+    "Règle : Le nom et son déterminant/adjectif doivent s'accorder en genre.",
+    "Masculin : un grand arbre / Féminin : une grande maison."
+  ],
+  "FUT_COND": [
+    "Futur : \"-rai\" (je mangerai demain) = action certaine dans le futur.",
+    "Conditionnel : \"-rais\" (je mangerais si...) = action hypothétique.",
+    "Astuce : remplacez le sujet par \"nous\" :",
+    "  - \"Je mangerai\" -> \"Nous mangerons\" -> futur -> -rai",
+    "  - \"Je mangerais\" -> \"Nous mangerions\" -> conditionnel -> -rais"
+  ],
+  "AI_AIE": [
+    "\"ai\" : Indicatif présent, 1re personne (j'ai faim).",
+    "\"aie\" : Subjonctif présent, 1re personne (il faut que j'aie).",
+    "\"ait\" : Subjonctif présent, 3e personne (il faut qu'il ait).",
+    "\"aient\" : Subjonctif présent, 3e personne du pluriel (qu'ils aient).",
+    "Règle : après \"que\", \"il faut que\", \"pour que\", \"bien que\" -> subjonctif."
+  ],
+  "SUBJONCTIF": [
+    "Règle : Le subjonctif s'utilise après certaines expressions :",
+    "il faut que, pour que, bien que, avant que, afin que, à moins que...",
+    "  - \"Il faut que tu viennes\" (subjonctif) et non \"il faut que tu viens\".",
+    "  - \"Bien qu'il soit malade\" (subjonctif) et non \"bien qu'il est malade\"."
+  ],
+  "IMP_PRES": [
+    "Règle : À l'impératif présent, les verbes en -er ne prennent PAS de \"s\" à la 2e personne du singulier.",
+    "  - \"Mange !\" et non \"Manges !\"",
+    "  - \"Parle !\" et non \"Parles !\"",
+    "Exception : on ajoute un \"s\" devant \"en\" et \"y\" pour la liaison :",
+    "  - \"Manges-en !\" / \"Vas-y !\""
+  ],
+  "ACCORD_PARTICIPE_AVOIR": [
+    "Règle : Avec l'auxiliaire \"avoir\", le participe passé s'accorde avec le COD seulement si celui-ci est placé AVANT le verbe.",
+    "  - \"J'ai mangé les pommes\" -> COD après -> pas d'accord -> mangé",
+    "  - \"Les pommes que j'ai mangées\" -> COD (les pommes) avant -> accord -> mangées",
+    "  - \"Je les ai vues\" -> COD (les) avant -> accord -> vues"
+  ],
+  "ACCORD_PARTICIPE_ETRE": [
+    "Règle : Avec l'auxiliaire \"être\", le participe passé s'accorde TOUJOURS avec le sujet en genre et en nombre.",
+    "  - \"Elle est partie\" (féminin singulier)",
+    "  - \"Ils sont partis\" (masculin pluriel)",
+    "  - \"Elles sont parties\" (féminin pluriel)"
+  ],
+  "PRONOMINAL": [
+    "Règle : Pour les verbes pronominaux, le participe passé s'accorde avec le sujet si le pronom réfléchi est COD.",
+    "  - \"Elle s'est lavée\" (s' = COD = elle -> accord)",
+    "  - \"Elle s'est lavé les mains\" (COD = les mains, après -> pas d'accord)",
+    "  - \"Ils se sont téléphoné\" (se = COI -> pas d'accord)"
+  ],
+  "CENSE_SENSE": [
+    "\"censé\" : Signifie \"supposé\" (je suis censé partir = supposé partir).",
+    "\"sensé\" : Signifie \"qui a du sens, raisonnable\" (une remarque sensée).",
+    "Astuce : remplacez par \"supposé\". Si ça marche, c'est \"censé\"."
+  ],
+  "DAVANTAGE": [
+    "\"davantage\" (en un mot) : Adverbe = \"plus\" (j'en veux davantage = plus).",
+    "\"d'avantage(s)\" (en deux mots) : \"de\" + nom = des bénéfices.",
+    "Astuce : remplacez par \"plus\". Si ça marche, c'est \"davantage\" en un mot."
+  ],
+  "PLUTOT": [
+    "\"plutôt\" (en un mot) : Adverbe = de préférence (je préfère plutôt le bleu).",
+    "\"plus tôt\" (en deux mots) : Contraire de \"plus tard\".",
+    "Astuce : remplacez par \"plus tard\". Si le contraire a du sens, c'est \"plus tôt\"."
+  ],
+  "PRET_PRES": [
+    "\"près\" : Adverbe de lieu, proche (près de la gare). Invariable.",
+    "\"prêt\" : Adjectif = préparé (je suis prêt). S'accorde : prêt/prête/prêts/prêtes.",
+    "Astuce : \"près de\" = à côté de. \"Prêt à\" = préparé pour."
+  ],
+  "QUOIQUE": [
+    "\"quoique\" (en un mot) : Conjonction = \"bien que\" (Quoiqu'il soit fatigué...).",
+    "\"quoi que\" (en deux mots) : = \"quelle que soit la chose que\".",
+    "Astuce : remplacez par \"bien que\". Si ça marche, c'est \"quoique\" en un mot.",
+    "  - \"Quoiqu'il pleuve\" -> \"Bien qu'il pleuve\" -> OK -> quoique",
+    "  - \"Quoi que tu fasses\" -> \"Bien que tu fasses\" -> non -> quoi que"
+  ],
+  "QUELQUE_QUEL_QUE": [
+    "\"quelque\" (en un mot) : Déterminant indéfini (quelques amis, quelque temps).",
+    "\"quel que\" (en deux mots) : Devant le verbe \"être\" au subjonctif.",
+    "S'accorde : quel que / quelle que / quels que / quelles que.",
+    "  - \"Quel que soit ton avis\" / \"Quelle que soit la raison\""
+  ],
+  "TOUT_TOUS": [
+    "\"tout\" : Singulier masculin ou adverbe (tout le monde, tout content).",
+    "\"tous\" : Pluriel masculin (tous les jours). Se prononce \"touss\" quand pronom.",
+    "\"toute\" : Singulier féminin (toute la journée).",
+    "\"toutes\" : Pluriel féminin (toutes les filles).",
+    "Règle : \"tout\" adverbe est invariable sauf devant un adjectif féminin commençant par une consonne ou un h aspiré : \"toute contente\", \"toute honteuse\"."
+  ],
+  "SI_SY": [
+    "\"si\" : Conjonction de condition (si tu viens) ou adverbe d'intensité (si beau).",
+    "\"s'y\" : Contraction de \"se y\" (il s'y intéresse = il s'intéresse à cela).",
+    "Astuce : remplacez par \"se ... y\". Si ça marche, c'est \"s'y\".",
+    "  - \"Il s'y connaît\" -> \"Il se connaît en cela\" -> OK -> s'y"
+  ],
+  "NI_NY": [
+    "\"ni\" : Conjonction de négation (ni toi ni moi).",
+    "\"n'y\" : Contraction de \"ne y\" (je n'y crois pas = je ne crois pas à cela).",
+    "Astuce : remplacez par \"ne ... à cela\". Si ça marche, c'est \"n'y\"."
+  ],
+  "SANS_SEN": [
+    "\"sans\" : Préposition de privation (sans argent, sans toi).",
+    "\"s'en\" : Contraction de \"se en\" (il s'en va = il s'en va de là).",
+    "Astuce : \"sans\" peut être suivi d'un nom. \"S'en\" est suivi d'un verbe."
+  ],
+  "EMMENT_AMMENT": [
+    "Règle de formation des adverbes en -ment à partir des adjectifs :",
+    "Adjectif en -ant -> adverbe en -amment (courant -> couramment).",
+    "Adjectif en -ent -> adverbe en -emment (récent -> récemment).",
+    "Les deux se prononcent pareil (\"ament\") mais s'écrivent différemment !"
+  ],
+  "NE_PAS": [
+    "Règle : En français écrit, la négation est en DEUX parties : ne ... pas/jamais/rien/plus.",
+    "\"Je ne sais pas\" et non \"Je sais pas\" (à l'écrit).",
+    "\"Il n'a rien dit\" et non \"Il a rien dit\".",
+    "Le \"ne\" est souvent oublié à l'oral, mais il est obligatoire à l'écrit."
+  ],
+  "PLEONASM": [
+    "Un pléonasme est une répétition inutile d'une idée déjà exprimée.",
+    "Exemples courants à éviter :",
+    "  - \"monter en haut\" -> \"monter\" suffit",
+    "  - \"descendre en bas\" -> \"descendre\" suffit",
+    "  - \"voire même\" -> \"voire\" suffit (voire = et même)",
+    "  - \"au jour d'aujourd'hui\" -> \"aujourd'hui\" suffit",
+    "  - \"prévoir à l'avance\" -> \"prévoir\" suffit"
+  ],
+  "MALGRE_QUE": [
+    "Règle : \"Malgré que\" est considéré comme incorrect en français soigné.",
+    "Utilisez \"bien que\" + subjonctif à la place.",
+    "  - \"Bien qu'il soit fatigué\" et non \"Malgré qu'il soit fatigué\".",
+    "\"Malgré\" s'utilise seul avec un nom : \"malgré la pluie\"."
+  ],
+  "APRES_QUE": [
+    "Règle : \"Après que\" est suivi de l'INDICATIF (pas du subjonctif).",
+    "C'est le contraire de \"avant que\" qui prend le subjonctif.",
+    "  - \"Après qu'il est parti\" (indicatif) -> correct",
+    "  - \"Après qu'il soit parti\" (subjonctif) -> incorrect"
+  ],
+  "T_EUPHONIQUE": [
+    "Règle : Dans les questions avec inversion, on ajoute \"-t-\" entre le verbe et \"il/elle/on\" quand le verbe finit par une voyelle. Avec des traits d'union.",
+    "  - \"Mange-t-il ?\" (et non \"Mange t il\" ou \"Mange-t'il\")",
+    "  - \"A-t-elle fini ?\" / \"Y a-t-il quelqu'un ?\"",
+    "Pas de -t- si le verbe finit déjà par t/d : \"Prend-il ?\", \"Vient-elle ?\""
+  ],
+  "HUNSPELL_RULE": [
+    "Erreur d'orthographe détectée par le dictionnaire.",
+    "Vérifiez l'orthographe du mot, en particulier :",
+    "  - Les consonnes doubles (appeler, apporter, occurrence, accueil...)",
+    "  - Les accents (é, è, ê, à, ù...)",
+    "  - Les lettres muettes (temps, doigt, poids...)"
+  ],
+  "MAJUSCULE": [
+    "Règle : Une majuscule est obligatoire :",
+    "  - En début de phrase, après un point.",
+    "  - Pour les noms propres (Paris, Marie, la France).",
+    "  - Pour les noms de peuples (les Français), mais pas les adjectifs (le peuple français).",
+    "  - Pour les jours et mois en début de phrase uniquement."
+  ],
+  "ESPACE_PONCTUATION": [
+    "Règle de typographie française :",
+    "Pas d'espace avant : . , ) ]",
+    "Espace insécable avant : ; : ! ? « »",
+    "  - \"Bonjour !\" et non \"Bonjour!\"",
+    "  - \"Il a dit : oui\" et non \"Il a dit :oui\""
+  ]
+}

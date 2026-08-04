@@ -21,6 +21,8 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.reflections:reflections:0.10.2")
     implementation("io.github.cdimascio:dotenv-java:3.2.0")
+    implementation("org.languagetool:languagetool-core:6.6")
+    implementation("org.languagetool:language-fr:6.6")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

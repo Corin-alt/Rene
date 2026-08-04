@@ -89,7 +89,7 @@ public class Rene {
             // Initialize JDA
             this.jda = JDABuilder.createDefault(token)
                     .disableCache(CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY)
-                    .enableIntents(List.of(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS))
+                    .enableIntents(List.of(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS))
                     .build().awaitStatus(JDA.Status.CONNECTED);
         } catch (IllegalArgumentException e) {
             if (e.getMessage().contains("Disallowed intent")) {
