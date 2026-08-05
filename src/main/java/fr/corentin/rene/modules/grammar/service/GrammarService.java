@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,13 @@ public class GrammarService {
 
     private static final Logger logger = LoggerFactory.getLogger(GrammarService.class);
     private static final Pattern MARKER_PATTERN = Pattern.compile("<marker>(.*?)</marker>");
+    private static final Pattern DISCORD_EMOJI_PATTERN = Pattern.compile("<a?:\\w+:\\d+>");
+    private static final Pattern UNICODE_EMOJI_PATTERN = Pattern.compile(
+            "[\\x{1F600}-\\x{1F64F}\\x{1F300}-\\x{1F5FF}\\x{1F680}-\\x{1F6FF}\\x{1F900}-\\x{1F9FF}" +
+            "\\x{1FA00}-\\x{1FA6F}\\x{1FA70}-\\x{1FAFF}\\x{2600}-\\x{26FF}\\x{2700}-\\x{27BF}" +
+            "\\x{FE00}-\\x{FE0F}\\x{200D}\\x{20E3}\\x{E0020}-\\x{E007F}" +
+            "\\x{2300}-\\x{23FF}\\x{2B50}\\x{2B55}\\x{3030}\\x{303D}\\x{3297}\\x{3299}]+");
+    private static final Pattern PUNCTUATION_ONLY_PATTERN = Pattern.compile("^[\\p{Punct}\\s,:;.!?…·•–—''\"«»]+$");
 
     private final JLanguageTool langTool;
     private final Map<String, String> explications = new HashMap<>();
@@ -107,8 +115,35 @@ public class GrammarService {
         }
     }
 
+    public String stripEmojis(String text) {
+        text = replaceKeepingLength(DISCORD_EMOJI_PATTERN, text);
+        text = replaceKeepingLength(UNICODE_EMOJI_PATTERN, text);
+        return text;
+    }
+
+    private String replaceKeepingLength(Pattern pattern, String text) {
+        Matcher m = pattern.matcher(text);
+        StringBuilder sb = new StringBuilder();
+        while (m.find()) {
+            m.appendReplacement(sb, Matcher.quoteReplacement(" ".repeat(m.group().length())));
+        }
+        m.appendTail(sb);
+        return sb.toString();
+    }
+
     public List<RuleMatch> check(String text) throws IOException {
-        return langTool.check(text);
+        String cleanedText = stripEmojis(text);
+        List<RuleMatch> matches = langTool.check(cleanedText);
+        return matches.stream()
+                .filter(match -> {
+                    String matched = cleanedText.substring(match.getFromPos(), match.getToPos());
+                    if (PUNCTUATION_ONLY_PATTERN.matcher(matched).matches()) {
+                        return false;
+                    }
+                    String categoryId = match.getRule().getCategory().getId().toString();
+                    return IGNORED_CATEGORIES.stream().noneMatch(categoryId::contains);
+                })
+                .collect(Collectors.toList());
     }
 
     public String getExplication(String ruleId) {
