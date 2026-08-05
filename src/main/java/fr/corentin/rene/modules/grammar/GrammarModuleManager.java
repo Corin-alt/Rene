@@ -12,7 +12,9 @@ public class GrammarModuleManager extends AModule {
 
     @Override
     public void enable() {
+        /**
         this.grammarService = new GrammarService();
+         */
         super.enable();
     }
 
@@ -22,7 +24,7 @@ public class GrammarModuleManager extends AModule {
 
     @Override
     public void registerListeners() {
-        EventManager.getInstance().registerListener("GrammarModule", new GrammarCheckListener(grammarService));
+        //EventManager.getInstance().registerListener("GrammarModule", new GrammarCheckListener(grammarService));
     }
 
     @Override
