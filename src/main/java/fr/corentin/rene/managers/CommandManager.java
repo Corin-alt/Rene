@@ -39,6 +39,10 @@ public class CommandManager {
             slashCommandData.addOptions(command.getOptions());
         }
 
+        if (!command.getSubcommands().isEmpty()) {
+            slashCommandData.addSubcommands(command.getSubcommands());
+        }
+
         registerCommand(command, slashCommandData);
     }
 
