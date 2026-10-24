@@ -3,10 +3,24 @@ package fr.corentin.rene.modules.linkcleaner;
 import fr.corentin.rene.modules.linkcleaner.service.LinkCleanerService;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LinkCleanerServiceTest {
-    private final LinkCleanerService service = new LinkCleanerService();
+    private final LinkCleanerService service = load(false);
+
+    private static LinkCleanerService load(boolean removeReferralMarketing) {
+        try (Reader reader = new InputStreamReader(LinkCleanerServiceTest.class.getResourceAsStream("/linkcleaner/rules.json"), StandardCharsets.UTF_8)) {
+            return new LinkCleanerService(reader, removeReferralMarketing);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
 
     @Test
     void removesGlobalTrackers() {
@@ -29,9 +43,22 @@ class LinkCleanerServiceTest {
     }
 
     @Test
+    void removesSiAndIsAsSeparateTrackers() {
+        assertEquals("https://youtu.be/abc?t=42", service.clean("https://youtu.be/abc?is=ONE&si=TWO&t=42"));
+        assertEquals("https://youtu.be/abc", service.clean("https://youtu.be/abc?is=ONE"));
+        assertEquals("https://youtu.be/abc", service.clean("https://youtu.be/abc?si=TWO"));
+    }
+
+    @Test
     void cleansAmazonRawRulesAndKeepsAffiliateTag() {
         assertEquals("https://www.amazon.fr/dp/B000?tag=moi-21",
                 service.clean("https://www.amazon.fr/Produit/dp/B000/ref=sr_1_1?crid=A&sprefix=b&tag=moi-21").replace("/Produit", ""));
+    }
+
+    @Test
+    void removesAffiliateTagWhenReferralMarketingIsEnabled() {
+        assertEquals("https://www.amazon.fr/dp/B000",
+                load(true).clean("https://www.amazon.fr/dp/B000?tag=moi-21"));
     }
 
     @Test

@@ -4,9 +4,6 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -18,26 +15,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-/**
- * Supprime les traqueurs des liens à partir des règles ClearURLs (clearurls.json).
- * Les règles "referralMarketing" (liens affiliés) et les fournisseurs "completeProvider" (blocage) sont volontairement ignorés.
- */
 public class LinkCleanerService {
     private static final Logger logger = LoggerFactory.getLogger(LinkCleanerService.class);
-    private static final String RULES_FILE = "/clearurls.json";
     private static final int MAX_REDIRECTIONS = 5;
 
     public static final Pattern URL_PATTERN = Pattern.compile("(https?://[^\\s<]+[^<.,:;\"'>)|\\]\\s])", Pattern.CASE_INSENSITIVE);
 
     private final List<Provider> providers = new ArrayList<>();
 
-    public LinkCleanerService() {
-        loadRules();
+    public LinkCleanerService(Reader rulesReader, boolean removeReferralMarketing) {
+        RulesFile file = new Gson().fromJson(rulesReader, RulesFile.class);
+        if (file == null || file.providers == null) return;
+
+        for (Map.Entry<String, ProviderData> entry : file.providers.entrySet()) {
+            Provider provider = Provider.compile(entry.getKey(), entry.getValue(), removeReferralMarketing);
+            if (provider != null) providers.add(provider);
+        }
+        logger.info("Chargé {} fournisseurs de règles de nettoyage de liens", providers.size());
     }
 
-    /**
-     * @return le lien nettoyé, ou le lien d'origine s'il ne contient aucun traqueur connu
-     */
     public String clean(String url) {
         return clean(url, 0);
     }
@@ -54,27 +50,6 @@ public class LinkCleanerService {
             current = provider.strip(current);
         }
         return current;
-    }
-
-    private void loadRules() {
-        try (InputStream is = getClass().getResourceAsStream(RULES_FILE)) {
-            if (is == null) {
-                logger.warn("{} introuvable dans les ressources", RULES_FILE);
-                return;
-            }
-            try (Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
-                RulesFile file = new Gson().fromJson(reader, RulesFile.class);
-                if (file == null || file.providers == null) return;
-
-                for (Map.Entry<String, ProviderData> entry : file.providers.entrySet()) {
-                    Provider provider = Provider.compile(entry.getKey(), entry.getValue());
-                    if (provider != null) providers.add(provider);
-                }
-            }
-            logger.info("Chargé {} fournisseurs de règles de nettoyage de liens", providers.size());
-        } catch (IOException e) {
-            logger.error("Erreur lors du chargement de {}", RULES_FILE, e);
-        }
     }
 
     private static Pattern compile(String provider, String regex) {
@@ -104,6 +79,7 @@ public class LinkCleanerService {
         String urlPattern;
         boolean completeProvider;
         List<String> rules;
+        List<String> referralMarketing;
         List<String> rawRules;
         List<String> exceptions;
         List<String> redirections;
@@ -111,7 +87,6 @@ public class LinkCleanerService {
 
     private static class Provider {
         private final Pattern urlPattern;
-        // Regroupe toutes les règles : le nom d'un paramètre doit correspondre entièrement à l'une d'elles
         private final Pattern paramPattern;
         private final List<Pattern> rawRules;
         private final List<Pattern> exceptions;
@@ -125,18 +100,19 @@ public class LinkCleanerService {
             this.redirections = redirections;
         }
 
-        static Provider compile(String name, ProviderData data) {
-            // Un fournisseur "complet" sert à bloquer des requêtes, ce qui n'a pas de sens pour un message
+        static Provider compile(String name, ProviderData data, boolean removeReferralMarketing) {
             if (data.completeProvider || data.urlPattern == null) return null;
 
             Pattern urlPattern = LinkCleanerService.compile(name, data.urlPattern);
             if (urlPattern == null) return null;
 
+            List<String> rules = new ArrayList<>();
+            if (data.rules != null) rules.addAll(data.rules);
+            if (removeReferralMarketing && data.referralMarketing != null) rules.addAll(data.referralMarketing);
+
             List<String> validRules = new ArrayList<>();
-            if (data.rules != null) {
-                for (String rule : data.rules) {
-                    if (LinkCleanerService.compile(name, rule) != null) validRules.add("(?:" + rule + ")");
-                }
+            for (String rule : rules) {
+                if (LinkCleanerService.compile(name, rule) != null) validRules.add("(?:" + rule + ")");
             }
             Pattern paramPattern = validRules.isEmpty() ? null
                     : LinkCleanerService.compile(name, "^(?:" + String.join("|", validRules) + ")(?:=[^&]*)?$");
@@ -155,9 +131,6 @@ public class LinkCleanerService {
             return true;
         }
 
-        /**
-         * @return l'adresse de destination si le lien n'est qu'une redirection de suivi (google.com/url?q=...), sinon null
-         */
         String findRedirection(String url) {
             for (Pattern redirection : redirections) {
                 Matcher matcher = redirection.matcher(url);
@@ -168,7 +141,6 @@ public class LinkCleanerService {
                         return target;
                     }
                 } catch (IllegalArgumentException ignored) {
-                    // Encodage invalide : on garde le lien tel quel
                 }
             }
             return null;
@@ -188,7 +160,6 @@ public class LinkCleanerService {
             String base = question >= 0 ? beforeFragment.substring(0, question) : beforeFragment;
             String query = question >= 0 ? beforeFragment.substring(question + 1) : null;
 
-            // Le lien n'est réécrit que si un paramètre a été retiré, sinon il reste strictement identique
             String newQuery = query == null ? null : filterParams(query, false);
             String newFragment = fragment == null ? null : filterParams(fragment, true);
             if (Objects.equals(newQuery, query) && Objects.equals(newFragment, fragment)) return result;
@@ -199,7 +170,6 @@ public class LinkCleanerService {
             return rebuilt.toString();
         }
 
-        // Dans un fragment, seuls les paramètres "clé=valeur" sont filtrés pour ne pas casser les ancres (#section)
         private String filterParams(String params, boolean keyValueOnly) {
             List<String> kept = new ArrayList<>();
             boolean removed = false;

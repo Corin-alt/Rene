@@ -3,6 +3,7 @@ package fr.corentin.rene.modules.linkcleaner.events;
 import fr.corentin.rene.events.parent.AEventListener;
 import fr.corentin.rene.modules.linkcleaner.service.LinkCleanerService;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.unions.GuildMessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -32,7 +33,6 @@ public class LinkCleanerMessageListener extends AEventListener {
         String content = event.getMessage().getContentRaw();
         if (!content.contains("http")) return;
 
-        // Réécrit le message en remplaçant chaque lien traqué par sa version nettoyée
         StringBuilder rewritten = new StringBuilder();
         Set<String> cleanedLinks = new LinkedHashSet<>();
         int processed = 0;
@@ -55,29 +55,31 @@ public class LinkCleanerMessageListener extends AEventListener {
         if (!channel.canTalk()) return;
 
         Message original = event.getMessage();
+        Member member = event.getMember();
         boolean canReplace = original.getAttachments().isEmpty()
                 && original.getStickers().isEmpty()
                 && event.getGuild().getSelfMember().hasPermission(channel, Permission.MESSAGE_MANAGE);
 
-        String author = MarkdownSanitizer.escape(event.getMember() != null ? event.getMember().getEffectiveName() : event.getAuthor().getName());
+        String author = MarkdownSanitizer.escape(member != null ? member.getEffectiveName() : event.getAuthor().getName());
         String text = "Message de " + author + " : " + rewritten;
 
-        // Sans droit de suppression (ou avec des pièces jointes), on ne peut pas remplacer le message : on répond avec les liens nettoyés
         if (!canReplace || text.length() > MAX_MESSAGE_LENGTH) {
             replyWithCleanedLinks(original, cleanedLinks);
             return;
         }
 
-        MessageCreateAction send = channel.sendMessage(text).setAllowedMentions(Set.of());
+        boolean suppressEmbeds = original.getFlags().contains(Message.MessageFlag.EMBEDS_SUPPRESSED)
+                || member == null
+                || !member.hasPermission(channel, Permission.MESSAGE_EMBED_LINKS);
+
+        MessageCreateAction send = channel.sendMessage(text).setAllowedMentions(Set.of()).setSuppressEmbeds(suppressEmbeds);
         Message referenced = original.getReferencedMessage();
         if (referenced != null) send = send.setMessageReference(referenced).mentionRepliedUser(false);
 
-        // Le message d'origine n'est supprimé qu'une fois le nouveau envoyé, pour ne jamais perdre le contenu
         send.queue(sent -> original.delete().queue(null, error -> {}), error -> {});
     }
 
     private void replyWithCleanedLinks(Message original, Set<String> cleanedLinks) {
-        // Les liens sont entourés de <> pour ne pas dupliquer l'aperçu du message d'origine
         StringBuilder reply = new StringBuilder(cleanedLinks.size() > 1 ? "🧹 Voici les liens sans traqueur :" : "🧹 Voici le lien sans traqueur :");
         for (String link : cleanedLinks) {
             String line = "\n<" + link + ">";
